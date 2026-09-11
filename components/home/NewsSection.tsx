@@ -1,229 +1,158 @@
-const newsItems = [
-  {
-    id: 1,
-    day: "12",
-    month: "सितंबर",
-    title: "अर्धवार्षिक परीक्षा समय सारणी जारी",
-    description:
-      "सत्र 2025-26 की अर्धवार्षिक परीक्षा से संबंधित समय सारणी जारी कर दी गई है।",
-    isNew: true,
-  },
-  {
-    id: 2,
-    day: "05",
-    month: "सितंबर",
-    title: "शिक्षक दिवस समारोह",
-    description:
-      "विद्यालय में शिक्षक दिवस के अवसर पर विशेष कार्यक्रम आयोजित किया जाएगा।",
-    isNew: false,
-  },
-  {
-    id: 3,
-    day: "20",
-    month: "अगस्त",
-    title: "स्वतंत्रता दिवस समारोह",
-    description:
-      "विद्यालय में स्वतंत्रता दिवस समारोह हर्षोल्लास के साथ मनाया गया।",
-    isNew: false,
-  },
-  {
-    id: 4,
-    day: "10",
-    month: "अगस्त",
-    title: "नवीन प्रवेश प्रक्रिया प्रारंभ",
-    description:
-      "नए सत्र के लिए प्रवेश प्रक्रिया प्रारंभ हो चुकी है।",
-    isNew: false,
-  },
-];
+import Link from "next/link";
+import { newsItems } from "./newsData";
 
 export default function NewsSection() {
+  const latestNews = [...newsItems]
+    .filter((item) => item.isPublished)
+    .sort((a, b) => a.sortOrder - b.sortOrder)
+    .slice(0, 4);
+
   return (
-    <section id="news" className="py-20">
+    <section
+      id="news"
+      className="bg-white py-20"
+    >
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
-      <div className="mx-auto grid max-w-[1250px] gap-12 px-4 sm:px-6 lg:grid-cols-[1fr_1.05fr] lg:px-8">
+        {/* Section Heading */}
+        <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <div>
+            <p className="section-kicker">
+              LATEST UPDATES
+            </p>
 
-        {/* =====================================================
-            NEWS
-        ====================================================== */}
-        <div>
+            <h2 className="section-heading mt-2">
+              नवीनतम सूचना एवं समाचार
+            </h2>
 
-          {/* Heading */}
-          <div className="mb-6 flex items-end justify-between border-b border-gray-200 pb-4">
-
-            <div>
-
-              <div className="section-kicker">
-                <span />
-                विद्यालय समाचार
-              </div>
-
-              <h2 className="mt-2 text-3xl font-black text-[#071D49]">
-                नवीनतम समाचार एवं कार्यक्रम
-              </h2>
-
-            </div>
-
-            <a
-              href="#"
-              className="hidden text-sm font-black text-[#7B1720] sm:block"
-            >
-              सभी देखें →
-            </a>
-
+            <p className="mt-4 max-w-2xl leading-8 text-slate-600">
+              विद्यालय से संबंधित महत्वपूर्ण सूचनाएँ, कार्यक्रम एवं
+              गतिविधियों की नवीनतम जानकारी यहाँ प्राप्त करें।
+            </p>
           </div>
 
-
-          {/* News List */}
-          <div className="space-y-3">
-
-            {newsItems.map((item) => (
-
-              <article
-                key={item.id}
-                className="group flex gap-4 rounded-xl border border-gray-200 bg-white p-4 transition duration-300 hover:border-[#F4C400] hover:shadow-md"
-              >
-
-                {/* Date */}
-                <div className="flex h-[62px] w-[62px] shrink-0 flex-col items-center justify-center rounded-lg bg-[#071D49] text-white">
-
-                  <strong className="text-xl leading-none">
-                    {item.day}
-                  </strong>
-
-                  <span className="mt-1 text-[10px] font-bold text-[#F4C400]">
-                    {item.month}
-                  </span>
-
-                </div>
-
-
-                {/* Content */}
-                <div className="min-w-0">
-
-                  <div className="flex flex-wrap items-center gap-2">
-
-                    <h3 className="font-black text-[#071D49]">
-                      {item.title}
-                    </h3>
-
-                    {item.isNew && (
-                      <span className="rounded-full bg-[#7B1720] px-2 py-0.5 text-[9px] font-black text-white">
-                        नया
-                      </span>
-                    )}
-
-                  </div>
-
-                  <p className="mt-1 text-sm leading-6 text-gray-500">
-                    {item.description}
-                  </p>
-
-                </div>
-
-              </article>
-
-            ))}
-
-          </div>
-
+          <Link
+            href="/news"
+            className="inline-flex w-fit items-center gap-2 font-bold text-[#071d49] transition hover:text-[#7b1720]"
+          >
+            सभी समाचार देखें
+            <span>→</span>
+          </Link>
         </div>
 
+        {/* Main Content */}
+        <div className="mt-12 grid gap-8 lg:grid-cols-[1.5fr_0.8fr]">
 
-        {/* =====================================================
-            NOTICE / FEATURED EVENT
-        ====================================================== */}
-        <div>
+          {/* News Cards */}
+          <div className="grid gap-5 sm:grid-cols-2">
+            {latestNews.map((item) => (
+              <article
+                key={item.id}
+                className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl"
+              >
+                {/* Top */}
+                <div className="flex items-center justify-between gap-3">
+                  <span
+                    className={`rounded-full px-3 py-1 text-xs font-bold ${
+                      item.type === "सूचना"
+                        ? "bg-[#071d49]/10 text-[#071d49]"
+                        : "bg-[#f4c400]/20 text-[#7b1720]"
+                    }`}
+                  >
+                    {item.type}
+                  </span>
 
-          <div className="mb-6 flex items-end justify-between border-b border-gray-200 pb-4">
+                  <span className="text-xs font-semibold text-slate-400">
+                    {item.date}
+                  </span>
+                </div>
 
-            <div>
+                {/* Title */}
+                <h3 className="mt-5 text-lg font-bold leading-7 text-[#071d49] transition group-hover:text-[#7b1720]">
+                  {item.title}
+                </h3>
 
-              <div className="section-kicker">
-                <span />
-                विशेष कार्यक्रम
+                {/* Excerpt */}
+                <p className="mt-3 line-clamp-3 text-sm leading-7 text-slate-600">
+                  {item.excerpt}
+                </p>
+
+                {/* Bottom */}
+                <div className="mt-5 flex items-center justify-between border-t border-slate-100 pt-4">
+                  <span className="text-xs font-semibold text-slate-400">
+                    {item.category}
+                  </span>
+
+                  <Link
+                    href="/news"
+                    className="text-sm font-bold text-[#071d49] transition hover:text-[#7b1720]"
+                  >
+                    पढ़ें →
+                  </Link>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          {/* Special Activities Panel */}
+          <div className="relative overflow-hidden rounded-3xl bg-[#071d49] p-8 text-white">
+            <div className="absolute -right-16 -top-16 h-40 w-40 rounded-full bg-[#f4c400]/10" />
+            <div className="absolute -bottom-20 -left-20 h-48 w-48 rounded-full bg-white/5" />
+
+            <div className="relative">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#f4c400] text-xl font-bold text-[#071d49]">
+                ★
               </div>
 
-              <h2 className="mt-2 text-3xl font-black text-[#071D49]">
-                विद्यालय की गतिविधियाँ
-              </h2>
+              <p className="mt-7 text-sm font-bold tracking-wide text-[#f4c400]">
+                SCHOOL ACTIVITIES
+              </p>
 
-            </div>
-
-            <a
-              href="/gallery"
-              className="hidden text-sm font-black text-[#7B1720] sm:block"
-            >
-              सभी देखें →
-            </a>
-
-          </div>
-
-
-          {/* Featured Image */}
-          <div className="group relative overflow-hidden rounded-2xl">
-
-            <img
-              src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1400&q=90"
-              alt="विद्यालय कार्यक्रम"
-              className="h-[300px] w-full object-cover transition duration-500 group-hover:scale-105"
-            />
-
-            <div className="absolute inset-0 bg-gradient-to-t from-[#071D49]/90 via-[#071D49]/20 to-transparent" />
-
-            <div className="absolute bottom-0 left-0 right-0 p-6">
-
-              <span className="inline-block rounded-full bg-[#F4C400] px-3 py-1 text-[10px] font-black text-[#071D49]">
+              <h3 className="mt-2 text-2xl font-extrabold">
                 विशेष कार्यक्रम
-              </span>
-
-              <h3 className="mt-3 text-2xl font-black text-white">
-                शिक्षा, संस्कार एवं विद्यार्थी गतिविधियाँ
               </h3>
 
-              <p className="mt-2 text-sm leading-6 text-white/80">
-                विद्यालय में आयोजित विभिन्न शैक्षणिक एवं
-                सांस्कृतिक गतिविधियों की झलक।
+              <p className="mt-4 leading-8 text-white/70">
+                विद्यालय में समय-समय पर शैक्षणिक, सांस्कृतिक एवं
+                खेलकूद गतिविधियों का आयोजन किया जाता है, जिससे
+                विद्यार्थियों के सर्वांगीण विकास को बढ़ावा मिले।
               </p>
 
-            </div>
+              {/* Activity Points */}
+              <div className="mt-7 space-y-4">
+                {[
+                  "शैक्षणिक गतिविधियाँ",
+                  "सांस्कृतिक कार्यक्रम",
+                  "खेलकूद गतिविधियाँ",
+                  "विद्यार्थी प्रतिभा प्रदर्शन",
+                ].map((activity) => (
+                  <div
+                    key={activity}
+                    className="flex items-center gap-3"
+                  >
+                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white/10 text-sm text-[#f4c400]">
+                      ✓
+                    </span>
 
+                    <span className="text-sm font-semibold text-white/85">
+                      {activity}
+                    </span>
+                  </div>
+                ))}
+              </div>
+
+              <Link
+                href="/gallery"
+                className="mt-8 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-[#071d49] transition hover:bg-[#f4c400]"
+              >
+                विद्यालय गतिविधियाँ देखें
+                <span>→</span>
+              </Link>
+            </div>
           </div>
-
-
-          {/* Small notices */}
-          <div className="mt-4 grid grid-cols-2 gap-3">
-
-            <div className="rounded-xl border border-gray-200 bg-[#F5F7FA] p-4">
-
-              <p className="text-xs font-black text-[#7B1720]">
-                सूचना
-              </p>
-
-              <p className="mt-1 text-sm font-bold text-[#071D49]">
-                विद्यालय समय-सारणी
-              </p>
-
-            </div>
-
-            <div className="rounded-xl border border-gray-200 bg-[#F5F7FA] p-4">
-
-              <p className="text-xs font-black text-[#7B1720]">
-                अपडेट
-              </p>
-
-              <p className="mt-1 text-sm font-bold text-[#071D49]">
-                नवीन प्रवेश जानकारी
-              </p>
-
-            </div>
-
-          </div>
-
         </div>
 
       </div>
-
     </section>
   );
 }

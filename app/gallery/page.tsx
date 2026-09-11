@@ -1,75 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
+import {
+  galleryCategories,
+  galleryItems,
+} from "@/components/home/galleryData";
 
-const galleryItems = [
-  {
-    id: 1,
-    title: "विद्यालय परिसर",
-    category: "विद्यालय परिसर",
-    image:
-      "https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    id: 2,
-    title: "शैक्षणिक गतिविधियाँ",
-    category: "शैक्षणिक गतिविधियाँ",
-    image:
-      "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    id: 3,
-    title: "सांस्कृतिक कार्यक्रम",
-    category: "सांस्कृतिक कार्यक्रम",
-    image:
-      "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    id: 4,
-    title: "खेलकूद गतिविधियाँ",
-    category: "खेलकूद",
-    image:
-      "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    id: 5,
-    title: "विद्यालय का वातावरण",
-    category: "विद्यालय परिसर",
-    image:
-      "https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    id: 6,
-    title: "विद्यार्थी गतिविधि",
-    category: "शैक्षणिक गतिविधियाँ",
-    image:
-      "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    id: 7,
-    title: "वार्षिक समारोह",
-    category: "वार्षिक समारोह",
-    image:
-      "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    id: 8,
-    title: "विद्यालय कार्यक्रम",
-    category: "अन्य कार्यक्रम",
-    image:
-      "https://images.unsplash.com/photo-1504274066651-8d31a536b11a?auto=format&fit=crop&w=1200&q=80",
-  },
-];
-
-const categories = [
-  "सभी",
-  "विद्यालय परिसर",
-  "शैक्षणिक गतिविधियाँ",
-  "सांस्कृतिक कार्यक्रम",
-  "खेलकूद",
-  "वार्षिक समारोह",
-  "अन्य कार्यक्रम",
-];
+const allCategories = ["सभी", ...galleryCategories];
 
 export default function GalleryPage() {
   const [activeCategory, setActiveCategory] = useState("सभी");
@@ -77,10 +14,18 @@ export default function GalleryPage() {
     (typeof galleryItems)[number] | null
   >(null);
 
-  const filteredItems =
-    activeCategory === "सभी"
-      ? galleryItems
-      : galleryItems.filter((item) => item.category === activeCategory);
+  const filteredItems = useMemo(() => {
+    return galleryItems
+      .filter((item) => item.isPublished)
+      .filter((item) => {
+        if (activeCategory === "सभी") {
+          return true;
+        }
+
+        return item.category === activeCategory;
+      })
+      .sort((a, b) => a.sortOrder - b.sortOrder);
+  }, [activeCategory]);
 
   return (
     <main className="bg-white">
@@ -134,7 +79,7 @@ export default function GalleryPage() {
       <section className="border-y border-gray-100 bg-[#f5f7fa]">
         <div className="mx-auto max-w-7xl px-5 py-5 sm:px-6 lg:px-8">
           <div className="flex gap-2 overflow-x-auto pb-1">
-            {categories.map((category) => {
+            {allCategories.map((category) => {
               const isActive = activeCategory === category;
 
               return (
@@ -212,6 +157,7 @@ export default function GalleryPage() {
         ) : (
           <div className="rounded-2xl border border-dashed border-gray-300 bg-[#f5f7fa] py-16 text-center">
             <div className="text-4xl">📷</div>
+
             <p className="mt-3 text-sm font-semibold text-gray-600">
               इस श्रेणी में अभी कोई तस्वीर उपलब्ध नहीं है।
             </p>
