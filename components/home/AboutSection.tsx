@@ -15,7 +15,7 @@ export default function AboutSection() {
 
               <img
                 src="https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1400&q=90"
-                alt="श्री विक्रमादित्य इंटर कॉलेज विद्यालय भवन"
+                alt="श्री विक्रमादित्य इण्टर कॉलेज विद्यालय भवन"
                 className="h-full w-full object-cover"
               />
 
@@ -24,11 +24,11 @@ export default function AboutSection() {
               <div className="absolute bottom-5 left-5">
 
                 <p className="text-sm font-bold text-white">
-                  श्री विक्रमादित्य इंटर कॉलेज
+                  श्री विक्रमादित्य इण्टर कॉलेज
                 </p>
 
                 <p className="text-xs text-white/80">
-                  बरौली कर्मा, कौंधियरा, प्रयागराज
+                  बरौली करमा, कौंधियरा, प्रयागराज
                 </p>
 
               </div>
@@ -82,7 +82,7 @@ export default function AboutSection() {
 
 
           <p className="mt-7 text-base leading-8 text-gray-600">
-            श्री विक्रमादित्य इंटर कॉलेज, बरौली कर्मा, कौंधियरा,
+            श्री विक्रमादित्य इण्टर कॉलेज, बरौली करमा, कौंधियरा,
             प्रयागराज विद्यार्थियों को गुणवत्तापूर्ण शिक्षा प्रदान करने
             तथा उनके सर्वांगीण विकास के लिए समर्पित एक शिक्षण संस्थान है।
           </p>
