@@ -29,11 +29,13 @@ export type AggregateSiteSetting = {
 export type SiteSettingAvgAggregateOutputType = {
   id: number | null
   establishedYear: number | null
+  homepageBannerCount: number | null
 }
 
 export type SiteSettingSumAggregateOutputType = {
   id: number | null
   establishedYear: number | null
+  homepageBannerCount: number | null
 }
 
 export type SiteSettingMinAggregateOutputType = {
@@ -49,6 +51,7 @@ export type SiteSettingMinAggregateOutputType = {
   motto: string | null
   logo: string | null
   websiteEnabled: boolean | null
+  homepageBannerCount: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -66,6 +69,7 @@ export type SiteSettingMaxAggregateOutputType = {
   motto: string | null
   logo: string | null
   websiteEnabled: boolean | null
+  homepageBannerCount: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -83,6 +87,7 @@ export type SiteSettingCountAggregateOutputType = {
   motto: number
   logo: number
   websiteEnabled: number
+  homepageBannerCount: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -92,11 +97,13 @@ export type SiteSettingCountAggregateOutputType = {
 export type SiteSettingAvgAggregateInputType = {
   id?: true
   establishedYear?: true
+  homepageBannerCount?: true
 }
 
 export type SiteSettingSumAggregateInputType = {
   id?: true
   establishedYear?: true
+  homepageBannerCount?: true
 }
 
 export type SiteSettingMinAggregateInputType = {
@@ -112,6 +119,7 @@ export type SiteSettingMinAggregateInputType = {
   motto?: true
   logo?: true
   websiteEnabled?: true
+  homepageBannerCount?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -129,6 +137,7 @@ export type SiteSettingMaxAggregateInputType = {
   motto?: true
   logo?: true
   websiteEnabled?: true
+  homepageBannerCount?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -146,6 +155,7 @@ export type SiteSettingCountAggregateInputType = {
   motto?: true
   logo?: true
   websiteEnabled?: true
+  homepageBannerCount?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -250,6 +260,7 @@ export type SiteSettingGroupByOutputType = {
   motto: string | null
   logo: string | null
   websiteEnabled: boolean
+  homepageBannerCount: number
   createdAt: Date
   updatedAt: Date
   _count: SiteSettingCountAggregateOutputType | null
@@ -290,6 +301,7 @@ export type SiteSettingWhereInput = {
   motto?: Prisma.StringNullableFilter<"SiteSetting"> | string | null
   logo?: Prisma.StringNullableFilter<"SiteSetting"> | string | null
   websiteEnabled?: Prisma.BoolFilter<"SiteSetting"> | boolean
+  homepageBannerCount?: Prisma.IntFilter<"SiteSetting"> | number
   createdAt?: Prisma.DateTimeFilter<"SiteSetting"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"SiteSetting"> | Date | string
 }
@@ -307,6 +319,7 @@ export type SiteSettingOrderByWithRelationInput = {
   motto?: Prisma.SortOrderInput | Prisma.SortOrder
   logo?: Prisma.SortOrderInput | Prisma.SortOrder
   websiteEnabled?: Prisma.SortOrder
+  homepageBannerCount?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _relevance?: Prisma.SiteSettingOrderByRelevanceInput
@@ -328,6 +341,7 @@ export type SiteSettingWhereUniqueInput = Prisma.AtLeast<{
   motto?: Prisma.StringNullableFilter<"SiteSetting"> | string | null
   logo?: Prisma.StringNullableFilter<"SiteSetting"> | string | null
   websiteEnabled?: Prisma.BoolFilter<"SiteSetting"> | boolean
+  homepageBannerCount?: Prisma.IntFilter<"SiteSetting"> | number
   createdAt?: Prisma.DateTimeFilter<"SiteSetting"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"SiteSetting"> | Date | string
 }, "id">
@@ -345,6 +359,7 @@ export type SiteSettingOrderByWithAggregationInput = {
   motto?: Prisma.SortOrderInput | Prisma.SortOrder
   logo?: Prisma.SortOrderInput | Prisma.SortOrder
   websiteEnabled?: Prisma.SortOrder
+  homepageBannerCount?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.SiteSettingCountOrderByAggregateInput
@@ -370,6 +385,7 @@ export type SiteSettingScalarWhereWithAggregatesInput = {
   motto?: Prisma.StringNullableWithAggregatesFilter<"SiteSetting"> | string | null
   logo?: Prisma.StringNullableWithAggregatesFilter<"SiteSetting"> | string | null
   websiteEnabled?: Prisma.BoolWithAggregatesFilter<"SiteSetting"> | boolean
+  homepageBannerCount?: Prisma.IntWithAggregatesFilter<"SiteSetting"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"SiteSetting"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"SiteSetting"> | Date | string
 }
@@ -386,6 +402,7 @@ export type SiteSettingCreateInput = {
   motto?: string | null
   logo?: string | null
   websiteEnabled?: boolean
+  homepageBannerCount?: number
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -403,6 +420,7 @@ export type SiteSettingUncheckedCreateInput = {
   motto?: string | null
   logo?: string | null
   websiteEnabled?: boolean
+  homepageBannerCount?: number
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -419,6 +437,7 @@ export type SiteSettingUpdateInput = {
   motto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   websiteEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  homepageBannerCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -436,6 +455,7 @@ export type SiteSettingUncheckedUpdateInput = {
   motto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   websiteEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  homepageBannerCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -453,6 +473,7 @@ export type SiteSettingCreateManyInput = {
   motto?: string | null
   logo?: string | null
   websiteEnabled?: boolean
+  homepageBannerCount?: number
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -469,6 +490,7 @@ export type SiteSettingUpdateManyMutationInput = {
   motto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   websiteEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  homepageBannerCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -486,6 +508,7 @@ export type SiteSettingUncheckedUpdateManyInput = {
   motto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   websiteEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  homepageBannerCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -509,6 +532,7 @@ export type SiteSettingCountOrderByAggregateInput = {
   motto?: Prisma.SortOrder
   logo?: Prisma.SortOrder
   websiteEnabled?: Prisma.SortOrder
+  homepageBannerCount?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -516,6 +540,7 @@ export type SiteSettingCountOrderByAggregateInput = {
 export type SiteSettingAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   establishedYear?: Prisma.SortOrder
+  homepageBannerCount?: Prisma.SortOrder
 }
 
 export type SiteSettingMaxOrderByAggregateInput = {
@@ -531,6 +556,7 @@ export type SiteSettingMaxOrderByAggregateInput = {
   motto?: Prisma.SortOrder
   logo?: Prisma.SortOrder
   websiteEnabled?: Prisma.SortOrder
+  homepageBannerCount?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -548,6 +574,7 @@ export type SiteSettingMinOrderByAggregateInput = {
   motto?: Prisma.SortOrder
   logo?: Prisma.SortOrder
   websiteEnabled?: Prisma.SortOrder
+  homepageBannerCount?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -555,6 +582,7 @@ export type SiteSettingMinOrderByAggregateInput = {
 export type SiteSettingSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   establishedYear?: Prisma.SortOrder
+  homepageBannerCount?: Prisma.SortOrder
 }
 
 export type NullableIntFieldUpdateOperationsInput = {
@@ -580,6 +608,7 @@ export type SiteSettingSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   motto?: boolean
   logo?: boolean
   websiteEnabled?: boolean
+  homepageBannerCount?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["siteSetting"]>
@@ -599,11 +628,12 @@ export type SiteSettingSelectScalar = {
   motto?: boolean
   logo?: boolean
   websiteEnabled?: boolean
+  homepageBannerCount?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type SiteSettingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "schoolName" | "schoolNameHindi" | "address" | "email" | "managerPhone" | "principalPhone" | "inquiryPhone" | "establishedYear" | "motto" | "logo" | "websiteEnabled" | "createdAt" | "updatedAt", ExtArgs["result"]["siteSetting"]>
+export type SiteSettingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "schoolName" | "schoolNameHindi" | "address" | "email" | "managerPhone" | "principalPhone" | "inquiryPhone" | "establishedYear" | "motto" | "logo" | "websiteEnabled" | "homepageBannerCount" | "createdAt" | "updatedAt", ExtArgs["result"]["siteSetting"]>
 
 export type $SiteSettingPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "SiteSetting"
@@ -621,6 +651,7 @@ export type $SiteSettingPayload<ExtArgs extends runtime.Types.Extensions.Interna
     motto: string | null
     logo: string | null
     websiteEnabled: boolean
+    homepageBannerCount: number
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["siteSetting"]>
@@ -1004,6 +1035,7 @@ export interface SiteSettingFieldRefs {
   readonly motto: Prisma.FieldRef<"SiteSetting", 'String'>
   readonly logo: Prisma.FieldRef<"SiteSetting", 'String'>
   readonly websiteEnabled: Prisma.FieldRef<"SiteSetting", 'Boolean'>
+  readonly homepageBannerCount: Prisma.FieldRef<"SiteSetting", 'Int'>
   readonly createdAt: Prisma.FieldRef<"SiteSetting", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"SiteSetting", 'DateTime'>
 }

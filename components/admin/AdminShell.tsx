@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import AdminSidebar from "@/components/admin/AdminSidebar";
 import WebsiteControl from "@/components/admin/WebsiteControl";
 import WebsiteAdminAccount from "@/components/admin/WebsiteAdminAccount";
+import BannersManager from "@/components/admin/BannersManager";
 
 type AdminRole = "SUPER_ADMIN" | "WEBSITE_ADMIN";
 
@@ -468,14 +469,8 @@ export default function AdminShell({
       case "dashboard":
         return <DashboardContent />;
 
-      case "banners":
-        return (
-          <EmptySection
-            title="Banners"
-            description="Homepage banners को add, edit, publish, unpublish और display order manage करने का module यहाँ बनेगा।"
-            icon={<BannerIcon />}
-          />
-        );
+        case "banners":
+               return <BannersManager />;
 
       case "news":
         return (

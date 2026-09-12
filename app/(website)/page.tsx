@@ -1,5 +1,9 @@
 
 import HeroSlider from "@/components/home/HeroSlider";
+import { getHomepageBanners } from "@/lib/homepage-banners";
+
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 import QuickLinks from "@/components/home/QuickLinks";
 
@@ -15,6 +19,7 @@ import AcademicsSection from "@/components/home/AcademicsSection";
 
 import AdmissionCTA from "@/components/home/AdmissionCTA";
 
+const homepageBanners = await getHomepageBanners();
 
 const quickLinks = [
   {
@@ -173,7 +178,7 @@ export default function Home() {
           HERO
       ====================================================== */}
      
-      <HeroSlider />
+      <HeroSlider banners={homepageBanners} />
 
       {/* =====================================================
           QUICK ACTIONS

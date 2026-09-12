@@ -196,6 +196,7 @@ export const SiteSettingScalarFieldEnum = {
   motto: 'motto',
   logo: 'logo',
   websiteEnabled: 'websiteEnabled',
+  homepageBannerCount: 'homepageBannerCount',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

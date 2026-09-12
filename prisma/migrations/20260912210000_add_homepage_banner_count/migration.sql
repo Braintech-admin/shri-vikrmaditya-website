@@ -1,0 +1,2 @@
+ALTER TABLE `SiteSetting`
+ADD COLUMN `homepageBannerCount` INTEGER NOT NULL DEFAULT 3;
