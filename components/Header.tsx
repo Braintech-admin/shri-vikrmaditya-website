@@ -6,6 +6,7 @@ export default function Header() {
       {/* Top Information Bar */}
       <div className="bg-[#F4C400] text-[#071D49]">
         <div className="mx-auto flex max-w-[1400px] items-center justify-between px-4 py-2 text-[11px] font-bold sm:px-6 sm:text-xs lg:px-8">
+          {/* Left Information */}
           <div className="flex items-center gap-2">
             <span>🏫</span>
             <span>स्थापना वर्ष : 2018</span>
@@ -17,8 +18,12 @@ export default function Header() {
             </span>
           </div>
 
-          <div className="hidden items-center gap-5 md:flex">
-            <a href="tel:9580548475" className="transition hover:underline">
+          {/* Right Information + Manage Website */}
+          <div className="hidden items-center gap-3 md:flex">
+            <a
+              href="tel:9580548475"
+              className="transition hover:underline"
+            >
               ☎ सामान्य पूछताछ : +91-9580548475
             </a>
 
@@ -28,6 +33,15 @@ export default function Header() {
             >
               ✉ vikramadityap20@gmail.com
             </a>
+
+            {/* Manage Website */}
+            <Link
+              href="/admin"
+              className="ml-2 inline-flex items-center gap-1.5 rounded-full border border-[#071D49]/30 bg-[#071D49] px-3 py-1 text-[10px] font-extrabold text-white shadow-sm transition-all duration-200 hover:bg-white hover:text-[#071D49]"
+            >
+              <span>⚙️</span>
+              <span>Manage Website</span>
+            </Link>
           </div>
         </div>
       </div>
@@ -61,37 +75,34 @@ export default function Header() {
           </div>
 
           {/* Traditional Educational Highlight */}
-<div className="hidden items-center xl:flex">
-  <div className="relative overflow-hidden rounded-2xl border border-[#F4C400]/50 bg-gradient-to-br from-[#071D49] via-[#123B7A] to-[#071D49] px-8 py-4 text-white shadow-lg">
+          <div className="hidden items-center xl:flex">
+            <div className="relative overflow-hidden rounded-2xl border border-[#F4C400]/50 bg-gradient-to-br from-[#071D49] via-[#123B7A] to-[#071D49] px-8 py-4 text-white shadow-lg">
+              {/* Decorative Circles */}
+              <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full border border-[#F4C400]/20" />
+              <div className="absolute -bottom-10 -left-10 h-24 w-24 rounded-full border border-white/10" />
 
-    {/* Decorative Circles */}
-    <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full border border-[#F4C400]/20" />
-    <div className="absolute -bottom-10 -left-10 h-24 w-24 rounded-full border border-white/10" />
+              <div className="relative flex items-center gap-4">
+                {/* Book / Education Icon */}
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-2 border-[#F4C400]/60 bg-[#F4C400] text-2xl shadow-md">
+                  📖
+                </div>
 
-    <div className="relative flex items-center gap-4">
+                <div className="text-center">
+                  <p className="text-[10px] font-bold tracking-[0.25em] text-[#F4C400]">
+                    ज्ञान ही शक्ति है
+                  </p>
 
-      {/* Book / Education Icon */}
-      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-2 border-[#F4C400]/60 bg-[#F4C400] text-2xl shadow-md">
-        📖
-      </div>
+                  <p className="mt-1 font-serif text-xl font-black leading-tight text-white">
+                    “विद्या विनयेन शोभते”
+                  </p>
 
-      <div className="text-center">
-        <p className="text-[10px] font-bold tracking-[0.25em] text-[#F4C400]">
-          ज्ञान ही शक्ति है
-        </p>
-
-        <p className="mt-1 font-serif text-xl font-black leading-tight text-white">
-          “विद्या विनयेन शोभते”
-        </p>
-
-        <p className="mt-1 text-[10px] font-medium tracking-wide text-white/70">
-          शिक्षा • संस्कार • अनुशासन
-        </p>
-      </div>
-
-    </div>
-  </div>
-</div>
+                  <p className="mt-1 text-[10px] font-medium tracking-wide text-white/70">
+                    शिक्षा • संस्कार • अनुशासन
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </header>
 
@@ -101,59 +112,35 @@ export default function Header() {
           {/* Desktop Navigation */}
           <div className="hidden items-center justify-between lg:flex">
             <div className="flex items-center">
-              <Link
-                href="/"
-                className="nav-link"
-              >
+              <Link href="/" className="nav-link">
                 मुख्य पृष्ठ
               </Link>
 
-              <Link
-                href="/about"
-                className="nav-link"
-              >
+              <Link href="/about" className="nav-link">
                 हमारे बारे में
               </Link>
 
-              <Link
-                href="/academics"
-                className="nav-link"
-              >
+              <Link href="/academics" className="nav-link">
                 शैक्षणिक
               </Link>
 
-              <Link
-                href="/admission"
-                className="nav-link"
-              >
+              <Link href="/admission" className="nav-link">
                 प्रवेश
               </Link>
 
-              <Link
-                href="/messages"
-                className="nav-link"
-              >
+              <Link href="/messages" className="nav-link">
                 संदेश
               </Link>
 
-              <Link
-                href="/gallery"
-                className="nav-link"
-              >
+              <Link href="/gallery" className="nav-link">
                 गैलरी
               </Link>
 
-              <Link
-                href="/news"
-                className="nav-link"
-              >
+              <Link href="/news" className="nav-link">
                 सूचना एवं समाचार
               </Link>
 
-              <Link
-                href="/contact"
-                className="nav-link"
-              >
+              <Link href="/contact" className="nav-link">
                 संपर्क
               </Link>
             </div>
@@ -210,6 +197,15 @@ export default function Header() {
                 संपर्क
               </Link>
 
+              {/* Manage Website */}
+              <Link
+                href="/admin"
+                className="mt-2 block rounded-lg border border-white/20 bg-white/10 px-4 py-3 text-center text-sm font-bold text-white transition hover:bg-[#F4C400] hover:text-[#071D49]"
+              >
+                ⚙️ Manage Website
+              </Link>
+
+              {/* Contact */}
               <a
                 href="tel:9580548475"
                 className="mt-2 block rounded-lg bg-[#F4C400] px-4 py-3 text-center text-sm font-black text-[#071D49]"
