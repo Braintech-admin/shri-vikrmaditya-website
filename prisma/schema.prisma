@@ -189,20 +189,21 @@ model GalleryItem {
 // ======================================================
 
 model SiteSetting {
-  id              Int      @id @default(autoincrement())
-  schoolName      String
-  schoolNameHindi String?
-  address         String   @db.Text
-  email           String?
-  managerPhone    String?
-  principalPhone  String?
-  inquiryPhone    String?
-  establishedYear Int?
-  motto           String?
-  logo            String?
-  websiteEnabled  Boolean  @default(true)
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  id                  Int      @id @default(autoincrement())
+  schoolName          String
+  schoolNameHindi     String?
+  address             String   @db.Text
+  email               String?
+  managerPhone        String?
+  principalPhone      String?
+  inquiryPhone        String?
+  establishedYear     Int?
+  motto               String?
+  logo                String?
+  websiteEnabled      Boolean  @default(true)
+  homepageBannerCount Int      @default(3)
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
 }
 
 // ======================================================
