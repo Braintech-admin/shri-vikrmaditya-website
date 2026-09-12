@@ -1,0 +1,227 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+// ======================================================
+// ENUMS
+// ======================================================
+
+enum UserRole {
+  SUPER_ADMIN
+  WEBSITE_ADMIN
+}
+
+enum NewsType {
+  NOTICE
+  EVENT
+}
+
+enum MessageRole {
+  PRINCIPAL
+  MANAGER
+}
+
+enum AuditAction {
+  CREATE
+  UPDATE
+  DELETE
+  LOGIN
+  LOGOUT
+  ENABLE
+  DISABLE
+}
+
+// ======================================================
+// USER
+// ======================================================
+
+model User {
+  id           Int      @id @default(autoincrement())
+  name         String
+  username     String   @unique
+  passwordHash String
+  role         UserRole
+  isActive     Boolean  @default(true)
+  lastLoginAt  DateTime?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  auditLogs    AuditLog[]
+
+  @@index([role])
+  @@index([isActive])
+}
+
+// ======================================================
+// BANNER
+// ======================================================
+
+model Banner {
+  id          Int      @id @default(autoincrement())
+  title       String
+  highlight   String
+  description String   @db.Text
+  image       String
+  buttonText  String?
+  buttonLink  String?
+  isPublished Boolean  @default(true)
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([isPublished])
+  @@index([sortOrder])
+}
+
+// ======================================================
+// NEWS CATEGORY
+// ======================================================
+
+model NewsCategory {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  isActive    Boolean  @default(true)
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  news        News[]
+
+  @@index([isActive])
+  @@index([sortOrder])
+}
+
+// ======================================================
+// NEWS
+// ======================================================
+
+model News {
+  id          Int          @id @default(autoincrement())
+  type        NewsType
+  title       String
+  date        DateTime
+  categoryId  Int
+  excerpt     String       @db.Text
+  content     String       @db.LongText
+  isPublished Boolean      @default(true)
+  isFeatured  Boolean      @default(false)
+  sortOrder   Int          @default(0)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  category    NewsCategory @relation(fields: [categoryId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+
+  @@index([categoryId])
+  @@index([date])
+  @@index([isPublished])
+  @@index([isFeatured])
+  @@index([sortOrder])
+}
+
+// ======================================================
+// SCHOOL MESSAGE
+// ======================================================
+
+model SchoolMessage {
+  id          Int          @id @default(autoincrement())
+  role        MessageRole
+  title       String
+  name        String
+  image       String
+  message     String       @db.Text
+  message2    String?      @db.Text
+  isPublished Boolean      @default(true)
+  sortOrder   Int          @default(0)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  @@index([role])
+  @@index([isPublished])
+  @@index([sortOrder])
+}
+
+// ======================================================
+// GALLERY CATEGORY
+// ======================================================
+
+model GalleryCategory {
+  id          Int           @id @default(autoincrement())
+  name        String        @unique
+  isActive    Boolean       @default(true)
+  sortOrder   Int           @default(0)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  items       GalleryItem[]
+
+  @@index([isActive])
+  @@index([sortOrder])
+}
+
+// ======================================================
+// GALLERY ITEM
+// ======================================================
+
+model GalleryItem {
+  id          Int             @id @default(autoincrement())
+  title       String
+  categoryId  Int
+  image       String
+  isPublished Boolean         @default(true)
+  sortOrder   Int             @default(0)
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+
+  category    GalleryCategory @relation(fields: [categoryId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+
+  @@index([categoryId])
+  @@index([isPublished])
+  @@index([sortOrder])
+}
+
+// ======================================================
+// SITE SETTINGS
+// ======================================================
+
+model SiteSetting {
+  id              Int      @id @default(autoincrement())
+  schoolName      String
+  schoolNameHindi String?
+  address         String   @db.Text
+  email           String?
+  managerPhone    String?
+  principalPhone  String?
+  inquiryPhone    String?
+  establishedYear Int?
+  motto           String?
+  logo            String?
+  websiteEnabled  Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+// ======================================================
+// AUDIT LOG
+// ======================================================
+
+model AuditLog {
+  id         Int         @id @default(autoincrement())
+  userId     Int
+  action     AuditAction
+  entity     String
+  entityId   Int?
+  details    String?     @db.Text
+  createdAt  DateTime    @default(now())
+
+  user       User        @relation(fields: [userId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+
+  @@index([userId])
+  @@index([action])
+  @@index([entity])
+  @@index([createdAt])
+}

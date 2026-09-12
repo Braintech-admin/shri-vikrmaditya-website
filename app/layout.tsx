@@ -1,14 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import GoToTop from "@/components/GoToTop";
-
 export const metadata: Metadata = {
-  title: "श्री विक्रमादित्य इण्टर कॉलेज | कौंधियरा, प्रयागराज",
+  title: "श्री विक्रमादित्य इंटर कॉलेज",
   description:
-    "श्री विक्रमादित्य इण्टर कॉलेज, कौंधियरा, प्रयागराज की आधिकारिक वेबसाइट।",
+    "श्री विक्रमादित्य इंटर कॉलेज, बरौली कर्मा, कौंधियरा, प्रयागराज",
 };
 
 export default function RootLayout({
@@ -18,15 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="hi">
-      <body>
-        <Header />
-
-        <main>{children}</main>
-
-        <Footer />
-
-        <GoToTop />
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
