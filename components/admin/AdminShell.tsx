@@ -6,6 +6,8 @@ import WebsiteControl from "@/components/admin/WebsiteControl";
 import WebsiteAdminAccount from "@/components/admin/WebsiteAdminAccount";
 import BannersManager from "@/components/admin/BannersManager";
 import NewsManager from "@/components/admin/NewsManager";
+import MessagesManager from "@/components/admin/MessagesManager";
+import GalleryManager from "@/components/admin/GalleryManager";
 
 type AdminRole = "SUPER_ADMIN" | "WEBSITE_ADMIN";
 
@@ -476,23 +478,11 @@ export default function AdminShell({
          case "news":
               return <NewsManager />;
 
-      case "messages":
-        return (
-          <EmptySection
-            title="Messages"
-            description="Principal और Manager के messages को manage करने का module यहाँ बनेगा।"
-            icon={<MessageIcon />}
-          />
-        );
+        case "messages":
+              return <MessagesManager />;
 
-      case "gallery":
-        return (
-          <EmptySection
-            title="Gallery"
-            description="विद्यालय की photos, categories, publish status और display order manage करने का module यहाँ बनेगा।"
-            icon={<GalleryIcon />}
-          />
-        );
+         case "gallery":
+              return <GalleryManager />;
 
       case "settings":
         return (
