@@ -20,6 +20,7 @@ export async function GET() {
       publishedBanners,
       publishedNews,
       publishedGalleryPhotos,
+      unreadContactEnquiries,
       siteSetting,
     ] = await Promise.all([
       prisma.banner.count({
@@ -40,6 +41,12 @@ export async function GET() {
         },
       }),
 
+      prisma.contactInquiry.count({
+        where: {
+          isRead: false,
+        },
+      }),
+
       prisma.siteSetting.findFirst({
         select: {
           websiteEnabled: true,
@@ -53,16 +60,22 @@ export async function GET() {
         publishedBanners,
         publishedNews,
         publishedGalleryPhotos,
-        websiteEnabled: siteSetting?.websiteEnabled ?? true,
+        unreadContactEnquiries,
+        websiteEnabled:
+          siteSetting?.websiteEnabled ?? true,
       },
     });
   } catch (error) {
-    console.error("Dashboard API error:", error);
+    console.error(
+      "Dashboard API error:",
+      error
+    );
 
     return NextResponse.json(
       {
         success: false,
-        message: "Dashboard data fetch करने में समस्या हुई।",
+        message:
+          "Dashboard data fetch करने में समस्या हुई।",
       },
       { status: 500 }
     );

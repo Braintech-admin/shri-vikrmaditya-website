@@ -405,7 +405,8 @@ export const ModelName = {
   GalleryCategory: 'GalleryCategory',
   GalleryItem: 'GalleryItem',
   SiteSetting: 'SiteSetting',
-  AuditLog: 'AuditLog'
+  AuditLog: 'AuditLog',
+  ContactInquiry: 'ContactInquiry'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -421,7 +422,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "banner" | "newsCategory" | "news" | "schoolMessage" | "galleryCategory" | "galleryItem" | "siteSetting" | "auditLog"
+    modelProps: "user" | "banner" | "newsCategory" | "news" | "schoolMessage" | "galleryCategory" | "galleryItem" | "siteSetting" | "auditLog" | "contactInquiry"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1019,6 +1020,72 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    ContactInquiry: {
+      payload: Prisma.$ContactInquiryPayload<ExtArgs>
+      fields: Prisma.ContactInquiryFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ContactInquiryFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactInquiryPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ContactInquiryFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactInquiryPayload>
+        }
+        findFirst: {
+          args: Prisma.ContactInquiryFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactInquiryPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ContactInquiryFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactInquiryPayload>
+        }
+        findMany: {
+          args: Prisma.ContactInquiryFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactInquiryPayload>[]
+        }
+        create: {
+          args: Prisma.ContactInquiryCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactInquiryPayload>
+        }
+        createMany: {
+          args: Prisma.ContactInquiryCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.ContactInquiryDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactInquiryPayload>
+        }
+        update: {
+          args: Prisma.ContactInquiryUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactInquiryPayload>
+        }
+        deleteMany: {
+          args: Prisma.ContactInquiryDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ContactInquiryUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.ContactInquiryUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactInquiryPayload>
+        }
+        aggregate: {
+          args: Prisma.ContactInquiryAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateContactInquiry>
+        }
+        groupBy: {
+          args: Prisma.ContactInquiryGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ContactInquiryGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ContactInquiryCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ContactInquiryCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1197,6 +1264,19 @@ export const AuditLogScalarFieldEnum = {
 export type AuditLogScalarFieldEnum = (typeof AuditLogScalarFieldEnum)[keyof typeof AuditLogScalarFieldEnum]
 
 
+export const ContactInquiryScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  mobile: 'mobile',
+  message: 'message',
+  isRead: 'isRead',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ContactInquiryScalarFieldEnum = (typeof ContactInquiryScalarFieldEnum)[keyof typeof ContactInquiryScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -1297,6 +1377,15 @@ export const AuditLogOrderByRelevanceFieldEnum = {
 } as const
 
 export type AuditLogOrderByRelevanceFieldEnum = (typeof AuditLogOrderByRelevanceFieldEnum)[keyof typeof AuditLogOrderByRelevanceFieldEnum]
+
+
+export const ContactInquiryOrderByRelevanceFieldEnum = {
+  name: 'name',
+  mobile: 'mobile',
+  message: 'message'
+} as const
+
+export type ContactInquiryOrderByRelevanceFieldEnum = (typeof ContactInquiryOrderByRelevanceFieldEnum)[keyof typeof ContactInquiryOrderByRelevanceFieldEnum]
 
 
 
@@ -1527,6 +1616,7 @@ export type GlobalOmitConfig = {
   galleryItem?: Prisma.GalleryItemOmit
   siteSetting?: Prisma.SiteSettingOmit
   auditLog?: Prisma.AuditLogOmit
+  contactInquiry?: Prisma.ContactInquiryOmit
 }
 
 /* Types for Logging */

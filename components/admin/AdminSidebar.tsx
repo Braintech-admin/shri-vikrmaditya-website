@@ -10,6 +10,7 @@ type AdminSection =
   | "news"
   | "messages"
   | "gallery"
+  | "contact"
   | "settings"
   | "users";
 
@@ -17,6 +18,7 @@ type AdminSidebarProps = {
   role: AdminRole;
   activeSection: AdminSection;
   onSectionChange: (section: AdminSection) => void;
+  unreadContactEnquiries?: number;
 };
 
 type MenuItem = {
@@ -99,6 +101,20 @@ function GalleryIcon() {
   );
 }
 
+function ContactIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+    >
+      <path d="M4 5h16v12H8l-4 3V5Z" />
+      <path d="M8 9h8M8 12h5" />
+    </svg>
+  );
+}
+
 function SettingsIcon() {
   return (
     <svg
@@ -159,6 +175,11 @@ const schoolAdminMenuItems: MenuItem[] = [
     icon: <GalleryIcon />,
   },
   {
+    id: "contact",
+    label: "Contact Enquiries",
+    icon: <ContactIcon />,
+  },
+  {
     id: "settings",
     label: "Site Settings",
     icon: <SettingsIcon />,
@@ -186,13 +207,10 @@ export default function AdminSidebar({
   role,
   activeSection,
   onSectionChange,
+  unreadContactEnquiries = 0,
 }: AdminSidebarProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  /*
-   * IMPORTANT:
-   * role is used INSIDE the component because it is a prop.
-   */
   const menuItems: MenuItem[] =
     role === "SUPER_ADMIN"
       ? superAdminMenuItems
@@ -237,17 +255,13 @@ export default function AdminSidebar({
       {/* Sidebar */}
       <aside
         className={`fixed left-0 top-0 z-50 flex h-screen w-72 flex-col bg-[#071d49] text-white shadow-2xl transition-transform duration-300 lg:sticky lg:top-16 lg:z-30 lg:h-[calc(100vh-4rem)] lg:w-64 lg:translate-x-0 lg:shadow-none ${
-          mobileOpen
-            ? "translate-x-0"
-            : "-translate-x-full"
+          mobileOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
         {/* Mobile Header */}
         <div className="flex items-center justify-between border-b border-white/10 px-5 py-4 lg:hidden">
           <div>
-            <p className="text-sm font-bold">
-              SVIC ADMIN
-            </p>
+            <p className="text-sm font-bold">SVIC ADMIN</p>
 
             <p className="text-xs text-white/60">
               Administration Panel
@@ -304,8 +318,11 @@ export default function AdminSidebar({
 
           <div className="space-y-1">
             {menuItems.map((item) => {
-              const active =
-                activeSection === item.id;
+              const active = activeSection === item.id;
+
+              const showUnreadBadge =
+                item.id === "contact" &&
+                unreadContactEnquiries > 0;
 
               return (
                 <button
@@ -332,7 +349,23 @@ export default function AdminSidebar({
                     </span>
                   </span>
 
-                  <span>{item.label}</span>
+                  <span className="min-w-0 flex-1">
+                    {item.label}
+                  </span>
+
+                  {showUnreadBadge && (
+                    <span
+                      className={`inline-flex min-w-6 items-center justify-center rounded-full px-2 py-0.5 text-[11px] font-extrabold ${
+                        active
+                          ? "bg-[#071d49] text-[#f4c400]"
+                          : "bg-[#f4c400] text-[#071d49]"
+                      }`}
+                    >
+                      {unreadContactEnquiries > 99
+                        ? "99+"
+                        : unreadContactEnquiries}
+                    </span>
+                  )}
                 </button>
               );
             })}

@@ -8,6 +8,7 @@ import BannersManager from "@/components/admin/BannersManager";
 import NewsManager from "@/components/admin/NewsManager";
 import MessagesManager from "@/components/admin/MessagesManager";
 import GalleryManager from "@/components/admin/GalleryManager";
+import ContactManager from "@/components/admin/ContactManager";
 
 type AdminRole = "SUPER_ADMIN" | "WEBSITE_ADMIN";
 
@@ -17,6 +18,7 @@ type AdminSection =
   | "news"
   | "messages"
   | "gallery"
+  | "contact"
   | "settings"
   | "users";
 
@@ -29,6 +31,7 @@ type DashboardData = {
   publishedNews: number;
   publishedGalleryPhotos: number;
   websiteEnabled: boolean;
+  unreadContactEnquiries: number;
 };
 
 type DashboardResponse = {
@@ -121,6 +124,22 @@ function GalleryIcon() {
   );
 }
 
+function ContactIcon() {
+  return (
+    <svg
+      width="22"
+      height="22"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+    >
+      <path d="M4 5h16v12H8l-4 3V5Z" />
+      <path d="M8 9h8M8 12h5" />
+    </svg>
+  );
+}
+
 function SettingsIcon() {
   return (
     <svg
@@ -154,46 +173,15 @@ function UsersIcon() {
   );
 }
 
-function EmptySection({
-  title,
-  description,
-  icon,
-}: {
-  title: string;
-  description: string;
-  icon: React.ReactNode;
-}) {
-  return (
-    <div className="rounded-2xl border border-gray-200 bg-white p-8 shadow-sm">
-      <div className="flex flex-col items-center justify-center py-12 text-center">
-        <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#071d49]/5 text-[#123b7a]">
-          {icon}
-        </div>
-
-        <h2 className="mt-5 text-xl font-extrabold text-[#071d49]">
-          {title}
-        </h2>
-
-        <p className="mt-2 max-w-md text-sm leading-6 text-gray-500">
-          {description}
-        </p>
-
-        <span className="mt-5 rounded-full bg-[#f4c400]/15 px-4 py-1.5 text-xs font-bold text-[#8b6d00]">
-          Module coming next
-        </span>
-      </div>
-    </div>
-  );
-}
-
 function DashboardContent() {
-  const [data, setData] = useState<DashboardData | null>(
-    null
-  );
+  const [data, setData] =
+    useState<DashboardData | null>(null);
 
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] =
+    useState(true);
 
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] =
+    useState<string | null>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -278,7 +266,7 @@ function DashboardContent() {
       )}
 
       {/* Stats */}
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
         {/* Banners */}
         <div className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
           <div className="flex items-start justify-between">
@@ -296,7 +284,9 @@ function DashboardContent() {
           </p>
 
           <p className="mt-1 text-3xl font-extrabold text-[#071d49]">
-            {loading ? "—" : data?.publishedBanners ?? 0}
+            {loading
+              ? "—"
+              : data?.publishedBanners ?? 0}
           </p>
         </div>
 
@@ -317,7 +307,30 @@ function DashboardContent() {
           </p>
 
           <p className="mt-1 text-3xl font-extrabold text-[#071d49]">
-            {loading ? "—" : data?.publishedNews ?? 0}
+            {loading
+              ? "—"
+              : data?.publishedNews ?? 0}
+          </p>
+        </div>
+
+        {/* Messages */}
+        <div className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
+          <div className="flex items-start justify-between">
+            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-purple-50 text-purple-700">
+              <MessageIcon />
+            </div>
+
+            <span className="text-xs font-bold text-gray-400">
+              Content
+            </span>
+          </div>
+
+          <p className="mt-5 text-sm font-semibold text-gray-500">
+            Messages
+          </p>
+
+          <p className="mt-1 text-3xl font-extrabold text-[#071d49]">
+            —
           </p>
         </div>
 
@@ -344,41 +357,62 @@ function DashboardContent() {
           </p>
         </div>
 
-        {/* Website */}
+        {/* Contact */}
         <div className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
           <div className="flex items-start justify-between">
-            <div
-              className={`flex h-11 w-11 items-center justify-center rounded-xl ${
-                data?.websiteEnabled
-                  ? "bg-green-50 text-green-700"
-                  : "bg-red-50 text-red-700"
-              }`}
-            >
-              <SettingsIcon />
+            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-orange-50 text-orange-700">
+              <ContactIcon />
             </div>
 
             <span className="text-xs font-bold text-gray-400">
-              System
+              Unread
             </span>
           </div>
 
           <p className="mt-5 text-sm font-semibold text-gray-500">
-            Website Status
+            Contact Enquiries
           </p>
 
-          <p
-            className={`mt-1 text-2xl font-extrabold ${
-              data?.websiteEnabled
-                ? "text-green-700"
-                : "text-red-700"
-            }`}
-          >
+          <p className="mt-1 text-3xl font-extrabold text-[#071d49]">
             {loading
               ? "—"
-              : data?.websiteEnabled
-                ? "ONLINE"
-                : "OFFLINE"}
+              : data?.unreadContactEnquiries ?? 0}
           </p>
+        </div>
+      </div>
+
+      {/* Website Status */}
+      <div className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm sm:p-6">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <p className="text-sm font-semibold text-gray-500">
+              Website Status
+            </p>
+
+            <p
+              className={`mt-1 text-2xl font-extrabold ${
+                data?.websiteEnabled
+                  ? "text-green-700"
+                  : "text-red-700"
+              }`}
+            >
+              {loading
+                ? "—"
+                : data?.websiteEnabled
+                  ? "ONLINE"
+                  : "OFFLINE"}
+            </p>
+          </div>
+
+          <div
+            className={`flex h-12 w-12 items-center justify-center rounded-xl ${
+              data?.websiteEnabled
+                ? "bg-green-50 text-green-700"
+                : "bg-red-50 text-red-700"
+            }`}
+          >
+            <SettingsIcon />
+          </div>
         </div>
       </div>
 
@@ -408,11 +442,7 @@ export default function AdminShell({
   role,
 }: AdminShellProps) {
   /*
-   * IMPORTANT:
    * Super Admin के पास Dashboard नहीं है।
-   * इसलिए उसका initial section Website Control रहेगा।
-   *
-   * Website Admin का initial section Dashboard रहेगा।
    */
   const initialSection: AdminSection =
     role === "SUPER_ADMIN"
@@ -423,7 +453,7 @@ export default function AdminShell({
     useState<AdminSection>(initialSection);
 
   /*
-   * Role बदलने की स्थिति में भी गलत section खुला न रहे।
+   * Role बदलने की स्थिति में गलत section खुला न रहे।
    */
   useEffect(() => {
     if (
@@ -436,7 +466,8 @@ export default function AdminShell({
 
     if (
       role === "WEBSITE_ADMIN" &&
-      activeSection === "users"
+      (activeSection === "users" ||
+        activeSection === "settings")
     ) {
       setActiveSection("dashboard");
     }
@@ -445,7 +476,6 @@ export default function AdminShell({
   function renderContent() {
     /*
      * SUPER ADMIN
-     * केवल Website Control और Users
      */
     if (role === "SUPER_ADMIN") {
       if (activeSection === "settings") {
@@ -453,14 +483,9 @@ export default function AdminShell({
       }
 
       if (activeSection === "users") {
-  return <WebsiteAdminAccount />;
-}
+        return <WebsiteAdminAccount />;
+      }
 
-      /*
-       * Safety fallback:
-       * अगर किसी वजह से कोई unauthorized section state में आ जाए,
-       * तो Super Admin को Dashboard या daily module नहीं दिखेगा।
-       */
       setActiveSection("settings");
       return null;
     }
@@ -472,25 +497,43 @@ export default function AdminShell({
       case "dashboard":
         return <DashboardContent />;
 
-        case "banners":
-              return <BannersManager />;
+      case "banners":
+        return <BannersManager />;
 
-         case "news":
-              return <NewsManager />;
+      case "news":
+        return <NewsManager />;
 
-        case "messages":
-              return <MessagesManager />;
+      case "messages":
+        return <MessagesManager />;
 
-         case "gallery":
-              return <GalleryManager />;
+      case "gallery":
+        return <GalleryManager />;
+
+      case "contact":
+        return <ContactManager />;
 
       case "settings":
         return (
-          <EmptySection
-            title="Site Settings"
-            description="विद्यालय की website information, contact details, address और अन्य public site settings यहाँ manage होंगी।"
-            icon={<SettingsIcon />}
-          />
+          <div className="rounded-2xl border border-gray-200 bg-white p-8 shadow-sm">
+            <div className="flex flex-col items-center justify-center py-12 text-center">
+              <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#071d49]/5 text-[#123b7a]">
+                <SettingsIcon />
+              </div>
+
+              <h2 className="mt-5 text-xl font-extrabold text-[#071d49]">
+                Site Settings
+              </h2>
+
+              <p className="mt-2 max-w-md text-sm leading-6 text-gray-500">
+                विद्यालय की website information, contact details,
+                address और अन्य public site settings यहाँ manage होंगी।
+              </p>
+
+              <span className="mt-5 rounded-full bg-[#f4c400]/15 px-4 py-1.5 text-xs font-bold text-[#8b6d00]">
+                Module coming next
+              </span>
+            </div>
+          </div>
         );
 
       default:
@@ -504,6 +547,7 @@ export default function AdminShell({
         role={role}
         activeSection={activeSection}
         onSectionChange={setActiveSection}
+        unreadContactEnquiries={0}
       />
 
       <main className="min-w-0 flex-1 p-4 sm:p-6 lg:p-8">

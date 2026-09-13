@@ -59,7 +59,8 @@ export const ModelName = {
   GalleryCategory: 'GalleryCategory',
   GalleryItem: 'GalleryItem',
   SiteSetting: 'SiteSetting',
-  AuditLog: 'AuditLog'
+  AuditLog: 'AuditLog',
+  ContactInquiry: 'ContactInquiry'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -217,6 +218,19 @@ export const AuditLogScalarFieldEnum = {
 export type AuditLogScalarFieldEnum = (typeof AuditLogScalarFieldEnum)[keyof typeof AuditLogScalarFieldEnum]
 
 
+export const ContactInquiryScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  mobile: 'mobile',
+  message: 'message',
+  isRead: 'isRead',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ContactInquiryScalarFieldEnum = (typeof ContactInquiryScalarFieldEnum)[keyof typeof ContactInquiryScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -317,4 +331,13 @@ export const AuditLogOrderByRelevanceFieldEnum = {
 } as const
 
 export type AuditLogOrderByRelevanceFieldEnum = (typeof AuditLogOrderByRelevanceFieldEnum)[keyof typeof AuditLogOrderByRelevanceFieldEnum]
+
+
+export const ContactInquiryOrderByRelevanceFieldEnum = {
+  name: 'name',
+  mobile: 'mobile',
+  message: 'message'
+} as const
+
+export type ContactInquiryOrderByRelevanceFieldEnum = (typeof ContactInquiryOrderByRelevanceFieldEnum)[keyof typeof ContactInquiryOrderByRelevanceFieldEnum]
 

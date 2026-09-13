@@ -86,3 +86,8 @@ export type SiteSetting = Prisma.SiteSettingModel
  * 
  */
 export type AuditLog = Prisma.AuditLogModel
+/**
+ * Model ContactInquiry
+ * 
+ */
+export type ContactInquiry = Prisma.ContactInquiryModel
