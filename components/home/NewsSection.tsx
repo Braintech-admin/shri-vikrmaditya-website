@@ -1,11 +1,22 @@
 import Link from "next/link";
-import { newsItems } from "./newsData";
+import { getPublishedNews } from "@/lib/news";
 
-export default function NewsSection() {
-  const latestNews = [...newsItems]
-    .filter((item) => item.isPublished)
-    .sort((a, b) => a.sortOrder - b.sortOrder)
-    .slice(0, 4);
+function formatDate(date: Date) {
+  return new Intl.DateTimeFormat("hi-IN", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  }).format(new Date(date));
+}
+
+function getTypeLabel(type: string) {
+  return type === "NOTICE" ? "सूचना" : "कार्यक्रम";
+}
+
+export default async function NewsSection() {
+  const latestNews = await getPublishedNews();
+
+  const visibleNews = latestNews.slice(0, 4);
 
   return (
     <section
@@ -45,58 +56,72 @@ export default function NewsSection() {
 
           {/* News Cards */}
           <div className="grid gap-5 sm:grid-cols-2">
-            {latestNews.map((item) => (
-              <article
-                key={item.id}
-                className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl"
-              >
-                {/* Top */}
-                <div className="flex items-center justify-between gap-3">
-                  <span
-                    className={`rounded-full px-3 py-1 text-xs font-bold ${
-                      item.type === "सूचना"
-                        ? "bg-[#071d49]/10 text-[#071d49]"
-                        : "bg-[#f4c400]/20 text-[#7b1720]"
-                    }`}
-                  >
-                    {item.type}
-                  </span>
 
-                  <span className="text-xs font-semibold text-slate-400">
-                    {item.date}
-                  </span>
-                </div>
+            {visibleNews.length > 0 ? (
+              visibleNews.map((item) => (
+                <article
+                  key={item.id}
+                  className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl"
+                >
+                  {/* Top */}
+                  <div className="flex items-center justify-between gap-3">
+                    <span
+                      className={`rounded-full px-3 py-1 text-xs font-bold ${
+                        item.type === "NOTICE"
+                          ? "bg-[#071d49]/10 text-[#071d49]"
+                          : "bg-[#f4c400]/20 text-[#7b1720]"
+                      }`}
+                    >
+                      {getTypeLabel(item.type)}
+                    </span>
 
-                {/* Title */}
-                <h3 className="mt-5 text-lg font-bold leading-7 text-[#071d49] transition group-hover:text-[#7b1720]">
-                  {item.title}
+                    <span className="text-xs font-semibold text-slate-400">
+                      {formatDate(item.date)}
+                    </span>
+                  </div>
+
+                  {/* Title */}
+                  <h3 className="mt-5 text-lg font-bold leading-7 text-[#071d49] transition group-hover:text-[#7b1720]">
+                    {item.title}
+                  </h3>
+
+                  {/* Excerpt */}
+                  <p className="mt-3 line-clamp-3 text-sm leading-7 text-slate-600">
+                    {item.excerpt}
+                  </p>
+
+                  {/* Bottom */}
+                  <div className="mt-5 flex items-center justify-between border-t border-slate-100 pt-4">
+                    <span className="text-xs font-semibold text-slate-400">
+                      {item.category.name}
+                    </span>
+
+                    <Link
+                      href={`/news/${item.id}`}
+                      className="text-sm font-bold text-[#071d49] transition hover:text-[#7b1720]"
+                    >
+                      पढ़ें →
+                    </Link>
+                  </div>
+                </article>
+              ))
+            ) : (
+              <div className="rounded-2xl border border-dashed border-slate-300 bg-slate-50 p-8 sm:col-span-2">
+                <h3 className="text-lg font-bold text-[#071d49]">
+                  अभी कोई नवीनतम सूचना उपलब्ध नहीं है।
                 </h3>
 
-                {/* Excerpt */}
-                <p className="mt-3 line-clamp-3 text-sm leading-7 text-slate-600">
-                  {item.excerpt}
+                <p className="mt-2 text-sm leading-7 text-slate-500">
+                  विद्यालय की नई सूचनाएँ यहाँ प्रदर्शित की जाएँगी।
                 </p>
-
-                {/* Bottom */}
-                <div className="mt-5 flex items-center justify-between border-t border-slate-100 pt-4">
-                  <span className="text-xs font-semibold text-slate-400">
-                    {item.category}
-                  </span>
-
-                  <Link
-                    href="/news"
-                    className="text-sm font-bold text-[#071d49] transition hover:text-[#7b1720]"
-                  >
-                    पढ़ें →
-                  </Link>
-                </div>
-              </article>
-            ))}
+              </div>
+            )}
           </div>
 
           {/* Special Activities Panel */}
           <div className="relative overflow-hidden rounded-3xl bg-[#071d49] p-8 text-white">
             <div className="absolute -right-16 -top-16 h-40 w-40 rounded-full bg-[#f4c400]/10" />
+
             <div className="absolute -bottom-20 -left-20 h-48 w-48 rounded-full bg-white/5" />
 
             <div className="relative">

@@ -5,6 +5,7 @@ import AdminSidebar from "@/components/admin/AdminSidebar";
 import WebsiteControl from "@/components/admin/WebsiteControl";
 import WebsiteAdminAccount from "@/components/admin/WebsiteAdminAccount";
 import BannersManager from "@/components/admin/BannersManager";
+import NewsManager from "@/components/admin/NewsManager";
 
 type AdminRole = "SUPER_ADMIN" | "WEBSITE_ADMIN";
 
@@ -470,16 +471,10 @@ export default function AdminShell({
         return <DashboardContent />;
 
         case "banners":
-               return <BannersManager />;
+              return <BannersManager />;
 
-      case "news":
-        return (
-          <EmptySection
-            title="News & Notices"
-            description="विद्यालय की news, notices और announcements को manage करने का module यहाँ बनेगा।"
-            icon={<NewsIcon />}
-          />
-        );
+         case "news":
+              return <NewsManager />;
 
       case "messages":
         return (
