@@ -55,6 +55,7 @@ model User {
 
   @@index([role])
   @@index([isActive])
+  @@map("user")
 }
 
 // ======================================================
@@ -76,6 +77,7 @@ model Banner {
 
   @@index([isPublished])
   @@index([sortOrder])
+  @@map("banner")
 }
 
 // ======================================================
@@ -94,6 +96,7 @@ model NewsCategory {
 
   @@index([isActive])
   @@index([sortOrder])
+  @@map("newscategory")
 }
 
 // ======================================================
@@ -121,6 +124,7 @@ model News {
   @@index([isPublished])
   @@index([isFeatured])
   @@index([sortOrder])
+  @@map("news")
 }
 
 // ======================================================
@@ -143,6 +147,7 @@ model SchoolMessage {
   @@index([role])
   @@index([isPublished])
   @@index([sortOrder])
+  @@map("schoolmessage")
 }
 
 // ======================================================
@@ -161,6 +166,7 @@ model GalleryCategory {
 
   @@index([isActive])
   @@index([sortOrder])
+  @@map("gallerycategory")
 }
 
 // ======================================================
@@ -182,6 +188,7 @@ model GalleryItem {
   @@index([categoryId])
   @@index([isPublished])
   @@index([sortOrder])
+  @@map("galleryitem")
 }
 
 // ======================================================
@@ -204,6 +211,8 @@ model SiteSetting {
   homepageBannerCount Int      @default(3)
   createdAt           DateTime @default(now())
   updatedAt           DateTime @updatedAt
+
+  @@map("sitesetting")
 }
 
 // ======================================================
@@ -225,6 +234,7 @@ model AuditLog {
   @@index([action])
   @@index([entity])
   @@index([createdAt])
+  @@map("auditlog")
 }
 
 // ======================================================
@@ -242,4 +252,5 @@ model ContactInquiry {
 
   @@index([isRead])
   @@index([createdAt])
+  @@map("contactinquiry")
 }
