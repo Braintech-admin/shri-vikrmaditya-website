@@ -1,6 +1,15 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
 
 export default function Header() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  function closeMobileMenu() {
+    setMobileMenuOpen(false);
+  }
+
   return (
     <>
       {/* Top Information Bar */}
@@ -35,13 +44,15 @@ export default function Header() {
             </a>
 
             {/* Manage Website */}
-            <Link
-              href="/admin"
-              className="ml-2 inline-flex items-center gap-1.5 rounded-full border border-[#071D49]/30 bg-[#071D49] px-3 py-1 text-[10px] font-extrabold text-white shadow-sm transition-all duration-200 hover:bg-white hover:text-[#071D49]"
-            >
-              <span>⚙️</span>
-              <span>Manage Website</span>
-            </Link>
+            <a
+  href="/admin"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="ml-2 inline-flex items-center gap-1.5 rounded-full border border-[#071D49]/30 bg-[#071D49] px-3 py-1 text-[10px] font-extrabold text-white shadow-sm transition-all duration-200 hover:bg-white hover:text-[#071D49]"
+>
+  <span>⚙️</span>
+  <span>Update Website</span>
+</a>
           </div>
         </div>
       </div>
@@ -155,65 +166,114 @@ export default function Header() {
           </div>
 
           {/* Mobile Navigation */}
-          <details className="lg:hidden">
-            <summary className="flex cursor-pointer list-none items-center justify-between py-3 text-sm font-black text-white">
-              <span>☰ मेनू</span>
+          <div className="lg:hidden">
+  <button
+    type="button"
+    onClick={() =>
+      setMobileMenuOpen((current) => !current)
+    }
+    className="flex w-full cursor-pointer items-center justify-between py-3 text-sm font-black text-white"
+    aria-expanded={mobileMenuOpen}
+    aria-controls="mobile-navigation"
+  >
+    <span>☰ मेनू</span>
 
-              <span className="rounded-full bg-[#F4C400] px-4 py-1.5 text-xs font-black text-[#071D49]">
-                मेनू खोलें
-              </span>
-            </summary>
+    <span className="rounded-full bg-[#F4C400] px-4 py-1.5 text-xs font-black text-[#071D49]">
+      {mobileMenuOpen ? "मेनू बंद करें" : "मेनू खोलें"}
+    </span>
+  </button>
 
-            <div className="border-t border-white/10 pb-3 pt-2">
-              <Link href="/" className="mobile-nav-link">
-                मुख्य पृष्ठ
-              </Link>
+  {mobileMenuOpen && (
+    <div
+      id="mobile-navigation"
+      className="border-t border-white/10 pb-3 pt-2"
+    >
+      <Link
+        href="/"
+        className="mobile-nav-link"
+        onClick={closeMobileMenu}
+      >
+        मुख्य पृष्ठ
+      </Link>
 
-              <Link href="/about" className="mobile-nav-link">
-                हमारे बारे में
-              </Link>
+      <Link
+        href="/about"
+        className="mobile-nav-link"
+        onClick={closeMobileMenu}
+      >
+        हमारे बारे में
+      </Link>
 
-              <Link href="/academics" className="mobile-nav-link">
-                शैक्षणिक
-              </Link>
+      <Link
+        href="/academics"
+        className="mobile-nav-link"
+        onClick={closeMobileMenu}
+      >
+        शैक्षणिक
+      </Link>
 
-              <Link href="/admission" className="mobile-nav-link">
-                प्रवेश
-              </Link>
+      <Link
+        href="/admission"
+        className="mobile-nav-link"
+        onClick={closeMobileMenu}
+      >
+        प्रवेश
+      </Link>
 
-              <Link href="/messages" className="mobile-nav-link">
-                संदेश
-              </Link>
+      <Link
+        href="/messages"
+        className="mobile-nav-link"
+        onClick={closeMobileMenu}
+      >
+        संदेश
+      </Link>
 
-              <Link href="/gallery" className="mobile-nav-link">
-                गैलरी
-              </Link>
+      <Link
+        href="/gallery"
+        className="mobile-nav-link"
+        onClick={closeMobileMenu}
+      >
+        गैलरी
+      </Link>
 
-              <Link href="/news" className="mobile-nav-link">
-                सूचना एवं समाचार
-              </Link>
+      <Link
+        href="/news"
+        className="mobile-nav-link"
+        onClick={closeMobileMenu}
+      >
+        सूचना एवं समाचार
+      </Link>
 
-              <Link href="/contact" className="mobile-nav-link">
-                संपर्क
-              </Link>
+      <Link
+        href="/contact"
+        className="mobile-nav-link"
+        onClick={closeMobileMenu}
+      >
+        संपर्क
+      </Link>
 
-              {/* Manage Website */}
-              <Link
-                href="/admin"
-                className="mt-2 block rounded-lg border border-white/20 bg-white/10 px-4 py-3 text-center text-sm font-bold text-white transition hover:bg-[#F4C400] hover:text-[#071D49]"
-              >
-                ⚙️ Manage Website
-              </Link>
+      {/* Update Website */}
+      <a
+        href="/admin"
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={closeMobileMenu}
+        className="mt-2 block rounded-lg border border-white/20 bg-white/10 px-4 py-3 text-center text-sm font-bold text-white transition hover:bg-[#F4C400] hover:text-[#071D49]"
+      >
+        ⚙️ Update Website
+      </a>
 
-              {/* Contact */}
-              <a
-                href="tel:9580548475"
-                className="mt-2 block rounded-lg bg-[#F4C400] px-4 py-3 text-center text-sm font-black text-[#071D49]"
-              >
-                📞 ऑनलाइन संपर्क
-              </a>
-            </div>
-          </details>
+      {/* Contact */}
+      <a
+        href="tel:9580548475"
+        onClick={closeMobileMenu}
+        className="mt-2 block rounded-lg bg-[#F4C400] px-4 py-3 text-center text-sm font-black text-[#071D49]"
+      >
+        📞 ऑनलाइन संपर्क
+      </a>
+    </div>
+  )}
+</div>
         </div>
       </nav>
     </>

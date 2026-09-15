@@ -198,7 +198,15 @@ export default function Footer() {
           </p>
 
           <p>
-            Designed & Developed by Braintech
+            Designed & Developed by{" "}
+<a
+  href="https://itsbraintech.com/"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="font-extrabold text-[#F4C400] underline decoration-[#F4C400]/40 underline-offset-4 transition-colors duration-200 hover:text-white hover:decoration-white"
+>
+  Braintech
+</a>
           </p>
         </div>
       </div>
