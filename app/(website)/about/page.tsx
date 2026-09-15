@@ -54,11 +54,11 @@ export default function AboutPage() {
       {/* Image */}
       <div className="relative pt-2 lg:pt-4">
         <div className="overflow-hidden rounded-2xl shadow-xl">
-          <img
-            src="https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1200&q=85"
+          <img 
+            src="/school-building.png"
             alt="विद्यालय भवन"
             className="h-[280px] w-full object-cover sm:h-[330px] lg:h-[360px]"
-          />
+            />
         </div>
 
         {/* Established Badge */}

@@ -39,3 +39,16 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Runtime uploaded media
+/public/uploads/*
+
+# Keep website banner images in Git
+!/public/uploads/banners/
+!/public/uploads/banners/*
+
+# Local AI/editor/tool folders
+/.agents/
+/.claude/
+/.cursor/
+/.devin/

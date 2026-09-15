@@ -85,7 +85,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({
       success: true,
-      image: `/uploads/gallery/${filename}`,
+      image: `/api/media/gallery/${filename}`,
     });
   } catch (error) {
     console.error("Gallery upload error:", error);

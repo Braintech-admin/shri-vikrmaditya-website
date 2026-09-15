@@ -13,10 +13,10 @@ export default function AboutSection() {
 
             <div className="relative aspect-[4/3] overflow-hidden rounded-xl">
 
-              <img
-                src="https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1400&q=90"
-                alt="श्री विक्रमादित्य इण्टर कॉलेज विद्यालय भवन"
-                className="h-full w-full object-cover"
+              <img 
+                src="/school-building.png"
+                alt="विद्यालय भवन"
+                className="h-[280px] w-full object-cover sm:h-[330px] lg:h-[360px]"
               />
 
               <div className="absolute inset-0 bg-gradient-to-t from-[#071D49]/60 to-transparent" />

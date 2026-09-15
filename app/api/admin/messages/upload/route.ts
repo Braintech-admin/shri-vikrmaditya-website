@@ -137,7 +137,7 @@ export async function POST(request: Request) {
     await writeFile(filePath, outputBuffer);
 
     const publicPath =
-      `/uploads/messages/${uniqueName}`;
+      `/api/media/messages/${uniqueName}`
 
     return NextResponse.json({
       success: true,
